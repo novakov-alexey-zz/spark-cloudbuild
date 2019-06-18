@@ -1,0 +1,21 @@
+steps:
+  - name: gcr.io/cloud-builders/wget
+    entrypoint: bash
+    - args:
+      - -c
+      - |
+        wget -q -O dist.tgz https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-without-hadoop-scala-2.12.tgz
+
+  - name: debian
+    args: ['tar', 'xzf', 'dist.tgz']
+
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+    - '-c'
+    - |
+      cd spark-2.4.3-bin-without-hadoop-scala-2.12 && ./bin/docker-image-tool.sh -r gcr.io/spark-test-244110 -t 2.4.3-k8s-scala-2.12 build        
+
+tags: ['cloud-build-spark']
+images: ['gcr.io/spark-test-244110/spark:2.4.3-k8s-scala-2.12']
+
