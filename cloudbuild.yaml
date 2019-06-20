@@ -15,7 +15,7 @@ steps:
       - -c
       - |
         mkdir dist
-        tar xzf dist.tgz -C dist --strip=components=1
+        tar xzf dist.tgz -C dist --strip-components=1
 
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
