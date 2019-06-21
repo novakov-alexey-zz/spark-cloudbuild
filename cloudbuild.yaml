@@ -16,6 +16,7 @@ steps:
       - |
         mkdir dist
         tar xzf dist.tgz -C dist --strip-components=1
+        cd dist/jars && wget https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-latest-hadoop2.jar 
 
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
